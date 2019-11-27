@@ -2,6 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Header from './components/header/header.js';
+import CategoriesFilterComponent from './components/category/categories';
 
 function App() {
   return (
@@ -10,6 +11,9 @@ function App() {
       {/* <SearchForm/> */}
       <div>
       {isAuthenticated() ? <Logout/> : <Login/>}</div>
+    <div>
+      <CategoriesFilterComponent/>
+    </div>
     </div>
   );
 }
