@@ -1,7 +1,6 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import Header from './components/header/header.js';
+import Header from './components/header/header';
 import CategoriesFilterComponent from './components/category/categories';
 
 function App() {

@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './categories.module.css'
 
-export default class CategoriesFilterComponent extends React.Component{
+export default class CategoriesFilterComponent extends React.Component<any, any>{
     constructor(props) {
         super(props)
         this.filterSelection = this.filterSelection.bind(this)
@@ -30,14 +30,12 @@ render() {
             <div id="myBtnContainer">
                 {this.getCategoriesList().map((item, i) =>{
                 console.log(`shown ${item} - ${i}`);
-                // eslint-disable-next-line no-unused-expressions
                 return <this.SimpleCategory key={i} category={item}/>
                 })}
             </div>
             <div className={styles.container}>
                 {this.getItems(this.state.currentCategory).map((item, i) =>{
-                // eslint-disable-next-line no-unused-expressions
-                return <p>{item.name} - {item.price} $</p>
+                return <p key={i}>{item.name} - {item.price} $</p>
                 })}
             </div>
         </>
