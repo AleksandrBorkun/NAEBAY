@@ -1,0 +1,15 @@
+[
+    {
+        "name": "Tesla",
+        "price": "100000",
+        "category": "Cars"
+    },{
+        "name": "Lego",
+        "price": "100",
+        "category": "Toys"
+    },{
+        "name": "MacBook",
+        "price": "1000",
+        "category": "Electronics"
+    }
+]

@@ -3,6 +3,8 @@ import './App.css';
 import Header from './components/header/header';
 import CategoriesFilterComponent from './components/category/categories';
 
+let isLoggedIn = false;
+
 function App() {
   return (
     <div className="App">
@@ -18,15 +20,15 @@ function App() {
 }
 
 function isAuthenticated(){
-  return false;
+  return isLoggedIn;
 }
 
 function Logout(){
-  return (<button>Logout</button>)
+  return (<button onClick={()=>{isLoggedIn=!isLoggedIn}}>Logout</button>)
 }
 
 function Login(){
-  return (<button>Login</button>)
+  return (<button onClick={()=>{isLoggedIn=!isLoggedIn}}>Login</button>)
 }
 
 export default App;
