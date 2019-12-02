@@ -9,7 +9,6 @@ app.get('/categories', function(req, res){
     res.json(CATEGORIES);
 })
 
-
 app.get('/items', function(req, res){
     res.json(ITEMS);
 })
