@@ -3,8 +3,8 @@ import "./App.css";
 import Header from "./components/header/header";
 import { CategoriesFilterComponent } from "./components/category/categories";
 import MySearch from "./components/search/search";
-import axios from 'axios';
 import { ProductsTable } from './components/products/productsTable';
+import { getProducts, getCategories } from './components/firebase/database';
 
 class App extends React.Component<any, { [key: string]: any }>{
   constructor(props) {
@@ -18,13 +18,13 @@ class App extends React.Component<any, { [key: string]: any }>{
     }
   }
 
-  //выполняеться автоматически при загрузке компонента
+  // выполняеться автоматически при загрузке компонента
   componentDidMount() {
-    axios.get('/items').then(resp => {
-      this.setState({ products: resp.data })
+    getProducts().then(resp => {
+      this.setState({ products: resp })
     })
-    axios.get('/categories').then(resp => {
-      this.setState({ categories: resp.data })
+    getCategories().then(resp => {
+      this.setState({ categories: resp })
     })
   }
 
