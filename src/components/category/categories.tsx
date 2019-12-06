@@ -17,5 +17,8 @@ export function CategoriesFilterComponent(props) {
 }
 
 function SimpleCategory(props) {
-    return (<button className={styles.simplpeCategory} onClick={() => props.onCategotyButtonClicked(props.category)}>{props.category}</button>)
+    return (<button 
+                className={styles.simplpeCategory} 
+                onClick={() => props.onCategotyButtonClicked(props.category)}>{props.category}
+            </button>)
 }

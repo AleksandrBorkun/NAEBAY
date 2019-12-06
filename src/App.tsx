@@ -47,7 +47,7 @@ class App extends React.Component<any, { [key: string]: any }>{
   render() {
     return (
       <div className="App">
-        <Header />
+        <Header/>
         <MySearch />
         <CategoriesFilterComponent
           categories={this.state.categories}
