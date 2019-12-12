@@ -99,7 +99,7 @@ class App extends React.Component<any, { [key: string]: any }>{
             path = '/dealer'
             exact
             render = {() => <DealerHomePage/>} />
-                      <Route
+          <Route
             path = '/login'
             exact
             render = {() => <LoginPage/>} />
