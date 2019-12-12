@@ -14,10 +14,16 @@ class App extends React.Component<any, { [key: string]: any }>{
     super(props);
     this.onCategotyButtonClicked = this.onCategotyButtonClicked.bind(this)
     this.getItems = this.getItems.bind(this)
+    this.onSearchFieldChanged = this.onSearchFieldChanged.bind(this)
+    this.onSelected = this.onSelected.bind(this)
+    this.onSearchSubmited = this.onSearchSubmited.bind(this)
     this.state = {
       categories: [] as [],
       currentCategory: 'All',
       products: [] as Product[],
+      searchValue: '',
+      searchTemp: '',
+      filter: 'name',
     }
   }
 
@@ -39,11 +45,38 @@ class App extends React.Component<any, { [key: string]: any }>{
   }
 
   getItems(): Product[] {
-    if (!this.state.currentCategory || this.state.currentCategory === 'All') {
-      return this.state.products || [] as Product[];
-    } else {
-      return this.state.products.filter(item => item.category === this.state.currentCategory)
-    }
+    return this.state.products
+      .filter(item => item.category === this.state.currentCategory || this.state.currentCategory === 'All')
+      .filter(item => {
+        if (this.state.filter === 'name') {
+          return item.name.toLowerCase().includes(this.state.searchValue)
+        } else {
+          return item.price.toLowerCase().includes(this.state.searchValue)
+        }
+      })
+  }
+
+  onSearchFieldChanged(event) {
+    console.log("Значение в поиске" + event.target.value);
+    this.setState({
+      searchTemp: event.target.value.toLowerCase()
+
+    })
+  }
+
+  onSearchSubmited(event) {
+    event.preventDefault();
+    this.setState({
+      searchValue: this.state.searchTemp
+    })
+  }
+
+  onSelected(event) {
+    console.log(event.target.value)
+    this.setState({
+      filter: event.target.value.toLowerCase()
+
+    })
   }
 
   //выполняеться автоматически. рендерит на экран компоненты
@@ -58,7 +91,10 @@ class App extends React.Component<any, { [key: string]: any }>{
           render = {() => <ConsumerHome 
             categories = {this.state.categories}
             onCategotyButtonClicked={this.onCategotyButtonClicked}
-            getItems={this.getItems } />} />
+            getItems={this.getItems } 
+            onSearchSubmited={this.onSearchSubmited}
+            onSearchFieldChanged={this.onSearchFieldChanged}
+            onSelected={this.onSelected}/>} />
           <Route
             path = '/dealer'
             exact
