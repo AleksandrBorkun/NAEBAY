@@ -1,7 +1,10 @@
-body {
-  background-color: #282c34;
-  color: white;
-  padding: 40px;
-  font-family: Arial;
-  text-align: center;
+.mySearch {
+  background-color: rgba(0, 0, 0, 0.76); /* Green */
+  border: rgb(0, 212, 219);
+  color: rgb(0, 212, 219);
+  padding: 10px 136px;
+  text-align: left;
+  text-decoration: rgb(111, 71, 255);
+  display: webkit;
+  font-size: 16px;
 }
