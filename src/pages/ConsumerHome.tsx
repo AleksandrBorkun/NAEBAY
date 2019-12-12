@@ -9,7 +9,7 @@ export default function ConsumerHome(props){
         <MySearch  
             onSearchSubmited={props.onSearchSubmited}
             onSearchFieldChanged={props.onSearchFieldChanged}
-            onSelected={props.onSelected}/>}/>
+            onSelected={props.onSelected}/>
         <CategoriesFilterComponent
           categories={props.categories}
           onCategotyButtonClicked={props.onCategotyButtonClicked}/>
