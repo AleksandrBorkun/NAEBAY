@@ -1,10 +1,13 @@
 import React from 'react'
 import "./App.css";
 import Header from "./components/header/header";
-import { CategoriesFilterComponent } from "./components/category/categories";
-import MySearch from "./components/search/search";
-import { ProductsTable } from './components/products/productsTable';
 import { getProducts, getCategories } from './components/firebase/database';
+import AppContext from './context/AppContext';
+import { Route } from 'react-router';
+import ConsumerHome from './pages/ConsumerHome';
+import DealerHomePage from './pages/DealerHomepage';
+import LoginPage from './pages/LoginPage';
+import AddProductPage from './pages/AddProductPage';
 
 class App extends React.Component<any, { [key: string]: any }>{
   constructor(props) {
@@ -46,17 +49,30 @@ class App extends React.Component<any, { [key: string]: any }>{
   //выполняеться автоматически. рендерит на экран компоненты
   render() {
     return (
+      <AppContext.Provider value={this.state}>
       <div className="App">
         <Header />
-        <MySearch />
-        <CategoriesFilterComponent
-          categories={this.state.categories}
-          currentCategory={this.state.currentCategory}
-          onCategotyButtonClicked={this.onCategotyButtonClicked}
-          products={this.state.products}
-          getItems={this.getItems} />
-        <ProductsTable getItems={this.getItems} />
+        <Route
+          path = '/'
+          exact
+          render = {() => <ConsumerHome 
+            categories = {this.state.categories}
+            onCategotyButtonClicked={this.onCategotyButtonClicked}
+            getItems={this.getItems } />} />
+          <Route
+            path = '/dealer'
+            exact
+            render = {() => <DealerHomePage/>} />
+                      <Route
+            path = '/login'
+            exact
+            render = {() => <LoginPage/>} />
+          <Route
+            path = '/products/add'
+            exact
+            render = {()=> <AddProductPage/>}/>
       </div>
+      </AppContext.Provider>
     );
   }
 }
