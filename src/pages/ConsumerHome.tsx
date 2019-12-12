@@ -6,7 +6,10 @@ import { ProductsTable } from '../components/products/productsTable';
 export default function ConsumerHome(props){
     return (
     <>
-        <MySearch />
+        <MySearch  
+            onSearchSubmited={props.onSearchSubmited}
+            onSearchFieldChanged={props.onSearchFieldChanged}
+            onSelected={props.onSelected}/>}/>
         <CategoriesFilterComponent
           categories={props.categories}
           onCategotyButtonClicked={props.onCategotyButtonClicked}/>
