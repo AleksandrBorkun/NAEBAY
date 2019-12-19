@@ -17,6 +17,10 @@ class App extends React.Component<any, { [key: string]: any }>{
     this.onSearchFieldChanged = this.onSearchFieldChanged.bind(this)
     this.onSelected = this.onSelected.bind(this)
     this.onSearchSubmited = this.onSearchSubmited.bind(this)
+    this.hanleFilesChosen = this.hanleFilesChosen.bind(this) 
+    this.handleFileRemoveClicked = this.handleFileRemoveClicked.bind(this)
+    this.handleFileUploads = this.handleFileUploads.bind(this)
+    
     this.state = {
       categories: [] as [],
       currentCategory: 'All',
@@ -24,6 +28,7 @@ class App extends React.Component<any, { [key: string]: any }>{
       searchValue: '',
       searchTemp: '',
       filter: 'name',
+      addedFiles: [] as File[]
     }
   }
 
@@ -79,6 +84,52 @@ class App extends React.Component<any, { [key: string]: any }>{
     })
   }
 
+  hanleFilesChosen(event){
+    let temp = this.state.addedFiles;
+    if(event.target.files && event.target.files.length > 0){
+      let count = temp.length;
+      for(let file of event.target.files){
+        console.log(file)
+        if(count > 10){
+          alert('Number of files more than 10')
+          break;
+        }
+        count++;
+        temp.push(file)
+      }
+      this.setState({
+        addedFiles: temp
+      })
+    }
+  }
+
+  handleFileRemoveClicked(event:File){
+    let temp = this.state.addedFiles.filter(item=>{return item !== event});
+    this.setState({
+      addedFiles: temp
+    })
+  }
+
+  handleFileUploads(){
+    // let filesToUpload = [];
+    if(this.state.addedFiles){
+      for(let i = 0; i < this.state.addedFiles.length; i++){
+        const file = this.state.addedFiles[i] as File
+        this.getBase64(file, (result)=>{
+          console.log(result)
+        })
+      }
+    }
+  }
+
+  getBase64(file, cb){
+    const render = new FileReader();
+    render.readAsDataURL(file);
+    render.onload = function(file){
+      cb(render.result)
+    };
+  }
+
   //выполняеться автоматически. рендерит на экран компоненты
   render() {
     return (
@@ -94,7 +145,12 @@ class App extends React.Component<any, { [key: string]: any }>{
             getItems={this.getItems } 
             onSearchSubmited={this.onSearchSubmited}
             onSearchFieldChanged={this.onSearchFieldChanged}
-            onSelected={this.onSelected}/>} />
+            onSelected={this.onSelected}
+            addedFiles = {this.state.addedFiles}
+            hanleFilesChosen = {this.hanleFilesChosen}
+            handleFileRemoveClicked = {this.handleFileRemoveClicked}
+            handleFileUploads = {this.handleFileUploads}
+            />} />
           <Route
             path = '/dealer'
             exact
