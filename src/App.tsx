@@ -33,6 +33,7 @@ class App extends React.Component<any, { [key: string]: any }>{
         category: 'all',
         paytype: 'paypal'
       },
+      binaryFiles: [] as string[]
     }
   }
 
@@ -111,7 +112,17 @@ class App extends React.Component<any, { [key: string]: any }>{
         addedFiles: temp
       })
     }
-  }
+    let binaryTemp = [] as string[]
+      for(let i = 0; i < this.state.addedFiles.length; i++){
+        const file = this.state.addedFiles[i] as File
+        this.getBase64(file, (result : string)=>{
+          binaryTemp.push(result)
+        })
+    }
+    this.setState({
+      binaryFiles: binaryTemp
+    })
+}
 
   handleRemoveClicked(event: File) {
     let temp = this.state.addedFiles.filter(item => { return item !== event });
@@ -121,13 +132,24 @@ class App extends React.Component<any, { [key: string]: any }>{
 
   }
 
-  onProductAddSubmited(event){
+  async onProductAddSubmited(event){
     event.preventDefault();
-    addNewProduct({...this.state.formField, image : this.state.addedFiles}).then(resp => {console.log('Success. Doc Id Is: ' + resp)})
-    // console.log('Form Data:')
-    // console.log(this.state.formField)
-    // console.log('Files Data:')
-    // console.log(this.state.addedFiles)
+    if(!this.state.addedFiles){
+      alert('Files Should Be Added!!!')
+      return;
+    }
+    addNewProduct({...this.state.formField, image : this.state.binaryFiles}).then(resp => {console.log('Success. Doc Id Is: ' + resp)})
+    this.setState({formField: {}})
+    document.location.href = '/'
+  }
+
+
+  getBase64(file, cb){
+    const render = new FileReader();
+    render.readAsDataURL(file);
+    render.onload = function(file){
+      cb(render.result)
+    };
   }
 
   //выполняеться автоматически. рендерит на экран компоненты
