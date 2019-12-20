@@ -15,3 +15,11 @@ export function getProducts() {
             return resp.docs.map(doc => {return doc.data() })
     })
 }
+
+export function addNewProduct(product : {name: string, desc: string, price: string, category: string, ownerId: string, image: string []}){
+
+}
+
+function addCategory(category: string){
+
+}

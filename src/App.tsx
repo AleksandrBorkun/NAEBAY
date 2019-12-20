@@ -7,7 +7,7 @@ import { Route } from 'react-router';
 import ConsumerHome from './pages/ConsumerHome';
 import DealerHomePage from './pages/DealerHomepage';
 import LoginPage from './pages/LoginPage';
-import AddProductPage from './pages/AddProductPage';
+import AddProductPage from './pages/AddProduct/AddProductPage';
 
 class App extends React.Component<any, { [key: string]: any }>{
   constructor(props) {
@@ -20,6 +20,7 @@ class App extends React.Component<any, { [key: string]: any }>{
     this.onFormFieldChanged = this.onFormFieldChanged.bind(this)
     this.handleFilesChosen = this.handleFilesChosen.bind(this)
     this.handleRemoveClicked = this.handleRemoveClicked.bind(this)
+    this.onProductAddSubmited = this.onProductAddSubmited.bind(this)
     this.state = {
       categories: [] as [],
       currentCategory: 'All',
@@ -77,7 +78,6 @@ class App extends React.Component<any, { [key: string]: any }>{
   }
 
   onSelected(event) {
-    console.log(event.target.value)
     this.setState({
       filter: event.target.value.toLowerCase()
 
@@ -88,7 +88,6 @@ class App extends React.Component<any, { [key: string]: any }>{
     let temp = this.state.formField;
     let key = event.target.name;
     temp[key] = event.target.value.toLowerCase();
-    console.log(temp);
     this.setState({
       formField: temp
     })
@@ -99,7 +98,6 @@ class App extends React.Component<any, { [key: string]: any }>{
     if (event.target.files && event.target.files.length > 0) {
       let count = temp.length;
       for (let file of event.target.files) {
-        console.log(file)
         if (count > 10) {
           alert('Number of files more than 10')
           break;
@@ -119,6 +117,14 @@ class App extends React.Component<any, { [key: string]: any }>{
       addedFiles: temp
     })
 
+  }
+
+  onProductAddSubmited(event){
+    event.preventDefault();
+    console.log('Form Data:')
+    console.log(this.state.formField)
+    console.log('Files Data:')
+    console.log(this.state.addedFiles)
   }
 
   //выполняеться автоматически. рендерит на экран компоненты
@@ -153,6 +159,8 @@ class App extends React.Component<any, { [key: string]: any }>{
               handleFilesChosen={this.handleFilesChosen}
               onFormFieldChanged={this.onFormFieldChanged}
               handleRemoveClicked={this.handleRemoveClicked}
+              categories = {this.state.categories}
+              onProductAddSubmited = {this.onProductAddSubmited}
             />} />
         </div>
       </AppContext.Provider>
