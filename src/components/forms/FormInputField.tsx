@@ -10,7 +10,9 @@ export default function FormInputField(props){
                 onChange={props.onChange} 
                 placeholder = {props.placeholder}
                 name={props.name}
-                multiple = {props.multiple}/>
+                multiple = {props.multiple}
+                accept={props.accept}
+                required/>
         </div>
     )
 }

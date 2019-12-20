@@ -1,0 +1,21 @@
+.lbl {
+    padding: 12px 12px 12px 0;
+    float: left;
+    width: 30%;
+    text-align: left;
+}
+
+.inputField{
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+    float: right;
+    width: 70%;
+}
+
+.inputBlock:after{
+    content: "";
+    display: table;
+    clear: both;
+}

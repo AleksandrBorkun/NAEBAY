@@ -1,7 +1,7 @@
 import React from 'react'
 import "./App.css";
 import Header from "./components/header/header";
-import { getProducts, getCategories } from './components/firebase/database';
+import { getProducts, getCategories, addNewProduct } from './components/firebase/database';
 import AppContext from './context/AppContext';
 import { Route } from 'react-router';
 import ConsumerHome from './pages/ConsumerHome';
@@ -29,7 +29,10 @@ class App extends React.Component<any, { [key: string]: any }>{
       searchTemp: '',
       filter: 'name',
       addedFiles: [] as File[],
-      formField: {},
+      formField: {
+        category: 'all',
+        paytype: 'paypal'
+      },
     }
   }
 
@@ -63,7 +66,6 @@ class App extends React.Component<any, { [key: string]: any }>{
   }
 
   onSearchFieldChanged(event) {
-    console.log("Значение в поиске" + event.target.value);
     this.setState({
       searchTemp: event.target.value.toLowerCase()
 
@@ -121,10 +123,11 @@ class App extends React.Component<any, { [key: string]: any }>{
 
   onProductAddSubmited(event){
     event.preventDefault();
-    console.log('Form Data:')
-    console.log(this.state.formField)
-    console.log('Files Data:')
-    console.log(this.state.addedFiles)
+    addNewProduct({...this.state.formField, image : this.state.addedFiles}).then(resp => {console.log('Success. Doc Id Is: ' + resp)})
+    // console.log('Form Data:')
+    // console.log(this.state.formField)
+    // console.log('Files Data:')
+    // console.log(this.state.addedFiles)
   }
 
   //выполняеться автоматически. рендерит на экран компоненты

@@ -16,7 +16,14 @@ export function getProducts() {
     })
 }
 
-export function addNewProduct(product : {name: string, desc: string, price: string, category: string, ownerId: string, image: string []}){
+export function addNewProduct(product : {name: string, desc: string, price: string, category: string, ownerId: string, phone:string, address:string, paytype:string, image: string []}){
+    return mountDB().collection('products').add(product)
+        .then(resp => {
+            return resp.id
+        })
+        .catch(err => {
+            console.error(err);
+        })
 
 }
 

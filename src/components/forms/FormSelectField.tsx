@@ -5,9 +5,12 @@ export default function(props){
     return (
         <div className={styles.inputBlock}>
         <label className={styles.lbl}> {props.label} </label>
-        <select    
+        <select 
+            required    
             className = {styles.inputField}
-            onChange={props.onFormFieldChanged} name={props.name}>
+            onChange={props.onChange} 
+            name={props.name}>
+            <option value="">None</option>
             {props.values.map( (value, key) => {
                 return <option key={key} value = {value}>{value}</option>
                     }                

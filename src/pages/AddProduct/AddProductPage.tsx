@@ -21,7 +21,7 @@ export default function (props) {
                         <FormSelectField
                             label='Categories*'
                             onChange={props.onFormFieldChanged}
-                            name='categories'
+                            name='category'
                             values={props.categories} />,
                         <FormInputField
                             label='Description*'
@@ -38,6 +38,7 @@ export default function (props) {
                         <FormInputField
                             label='Image *'
                             type='file'
+                            accept='image/png, image/jpeg'
                             onChange={props.handleFilesChosen}
                             name='image'
                             multiple={true} />,
@@ -52,19 +53,19 @@ export default function (props) {
                         label='Address *'
                         type="text"
                         placeholder="Set Address"
-                        name='Address'
+                        name='address'
                         onChange={props.onFormFieldChanged} />,
                     <FormInputField
                         label='Phone Number'
                         type='text'
                         placeholder="Phone number"
-                        name='Phone number'
+                        name='phone'
                         onChange={props.onFormFieldChanged} />,
                     <FormInputField
                         label='The contact person'
                         type='text'
                         placeholder="The contact person"
-                        name='The contact person'
+                        name='ownerId'
                         onChange={props.onFormFieldChanged} />,
                     <FormSelectField
                         label='Payment Type'
