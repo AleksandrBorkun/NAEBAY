@@ -17,6 +17,9 @@ class App extends React.Component<any, { [key: string]: any }>{
     this.onSearchFieldChanged = this.onSearchFieldChanged.bind(this)
     this.onSelected = this.onSelected.bind(this)
     this.onSearchSubmited = this.onSearchSubmited.bind(this)
+    this.onFormFieldChanged = this.onFormFieldChanged.bind(this)
+    this.handleFilesChosen = this.handleFilesChosen.bind(this)
+    this.handleRemoveClicked = this.handleRemoveClicked.bind(this)
     this.state = {
       categories: [] as [],
       currentCategory: 'All',
@@ -24,6 +27,8 @@ class App extends React.Component<any, { [key: string]: any }>{
       searchValue: '',
       searchTemp: '',
       filter: 'name',
+      addedFiles: [] as File[],
+      formField: {},
     }
   }
 
@@ -79,35 +84,77 @@ class App extends React.Component<any, { [key: string]: any }>{
     })
   }
 
+  onFormFieldChanged(event) {
+    let temp = this.state.formField;
+    let key = event.target.name;
+    temp[key] = event.target.value.toLowerCase();
+    console.log(temp);
+    this.setState({
+      formField: temp
+    })
+  }
+
+  handleFilesChosen(event) {
+    let temp = this.state.addedFiles;
+    if (event.target.files && event.target.files.length > 0) {
+      let count = temp.length;
+      for (let file of event.target.files) {
+        console.log(file)
+        if (count > 10) {
+          alert('Number of files more than 10')
+          break;
+        }
+        count++;
+        temp.push(file)
+      }
+      this.setState({
+        addedFiles: temp
+      })
+    }
+  }
+
+  handleRemoveClicked(event: File) {
+    let temp = this.state.addedFiles.filter(item => { return item !== event });
+    this.setState({
+      addedFiles: temp
+    })
+
+  }
+
   //выполняеться автоматически. рендерит на экран компоненты
   render() {
     return (
       <AppContext.Provider value={this.state}>
-      <div className="App">
-        <Header />
-        <Route
-          path = '/'
-          exact
-          render = {() => <ConsumerHome 
-            categories = {this.state.categories}
-            onCategotyButtonClicked={this.onCategotyButtonClicked}
-            getItems={this.getItems } 
-            onSearchSubmited={this.onSearchSubmited}
-            onSearchFieldChanged={this.onSearchFieldChanged}
-            onSelected={this.onSelected}/>} />
+        <div className="App">
+          <Header />
           <Route
-            path = '/dealer'
+            path='/'
             exact
-            render = {() => <DealerHomePage/>} />
+            render={() => <ConsumerHome
+              categories={this.state.categories}
+              onCategotyButtonClicked={this.onCategotyButtonClicked}
+              getItems={this.getItems}
+              onSearchSubmited={this.onSearchSubmited}
+              onSearchFieldChanged={this.onSearchFieldChanged}
+              onSelected={this.onSelected} />} />
           <Route
-            path = '/login'
+            path='/dealer'
             exact
-            render = {() => <LoginPage/>} />
+            render={() => <DealerHomePage />} />
           <Route
-            path = '/products/add'
+            path='/login'
             exact
-            render = {()=> <AddProductPage/>}/>
-      </div>
+            render={() => <LoginPage />} />
+          <Route
+            path='/products/add'
+            exact
+            render={() => <AddProductPage
+              addedFiles={this.state.addedFiles}
+              handleFilesChosen={this.handleFilesChosen}
+              onFormFieldChanged={this.onFormFieldChanged}
+              handleRemoveClicked={this.handleRemoveClicked}
+            />} />
+        </div>
       </AppContext.Provider>
     );
   }
