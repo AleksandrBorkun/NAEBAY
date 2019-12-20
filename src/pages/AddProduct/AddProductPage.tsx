@@ -73,19 +73,19 @@ export default function (props) {
                         values={['PayPal', 'Cash', 'Bank']} />
                 ]}
             />
-            <button type='submit'>Revise</button>
-            <button type='submit'>Save</button>
+            <button className = {styles.formSubmitBtn} type='submit'>Revise</button>
+            <button className = {styles.formSubmitBtn}type='submit'>Save</button>
         </form>
     )
 }
 
 function AddedFilesList(props) {
-    return <ul>
+    return <ul className={styles.ul}>
         {props.addedFiles.map((image: File, key) => {
             return (
-                <li key={key}>
+                <li className={styles.li} key={key}>
                     {image.name} - {image.size}Kb
-                    <button onClick={() => props.handleRemoveClicked(image)}>X</button>
+                    <button className = {styles.removeListItemBtn} type='button' onClick={() => props.handleRemoveClicked(image)}>X</button>
                 </li>
             )
         })
