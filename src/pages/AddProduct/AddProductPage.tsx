@@ -7,15 +7,13 @@ import FormFieldsSet from '../../components/forms/FormFieldsSet';
 export default function (props) {
     return (
         <div>
-            <h1>Add New Product!</h1>
+            <h1 style={styles}>Add New Product!</h1>
             <form className='Add New Product' id='title' onSubmit={props.onProductAddSubmited}>
                 <FormFieldsSet
-                    className = {styles.legend}
                     legend='Product Details'
                     formFields={ // < - - - - cюда впихиваем все элементы которые должны быть в сете через запятую
                         [
                             <FormInputField
-                                className={styles.inputBlock}
                                 label='Title*'
                                 type='text'
                                 onChange={props.onFormFieldChanged}
@@ -23,19 +21,16 @@ export default function (props) {
                                 placeholder='Set Title Here' />,
                             <FormSelectField
                                 label='Categories*'
-                                className={styles.inputBlock}
                                 onChange={props.onFormFieldChanged}
                                 name='categories'
                                 values={props.categories} />,
                             <FormInputField
                                 label='Description*'
-                                className={styles.inputBlock}
                                 type='text'
                                 onChange={props.onFormFieldChanged}
                                 placeholder='Set Title Here'
                                 name='desc' />,
                             <FormInputField
-                                className={styles.inputBlock}
                                 label='Price *'
                                 type='text'
                                 placeholder='set price'
@@ -46,14 +41,12 @@ export default function (props) {
                                 type='file'
                                 onChange={props.handleFilesChosen}
                                 name='image'
-                                multiple={true}
-                                className={styles.inputBlock} />,
+                                multiple={true}/>,
                             <AddedFilesList {...props} />
                         ]
                     } 
                 />
                 <FormFieldsSet
-                    className = {styles.legend}
                     legend='Contac Information'
                     formFields={[
                         <FormInputField
@@ -61,27 +54,23 @@ export default function (props) {
                             type="text"
                             placeholder="Set Address"
                             name='Address'
-                            onChange={props.onFormFieldChanged}
-                            className={styles.inputBlock} />,
+                            onChange={props.onFormFieldChanged}/>,
                         <FormInputField
                             label='Phone Number'
                             type='text'
                             placeholder="Phone number"
                             name='Phone number'
-                            onChange={props.onFormFieldChanged}
-                            className={styles.inputBlock} />,
+                            onChange={props.onFormFieldChanged}/>,
                         <FormInputField
                             label='The contact person'
                             type='text'
                             placeholder="The contact person"
                             name='The contact person'
-                            onChange={props.onFormFieldChanged}
-                            className={styles.inputBlock} />,
+                            onChange={props.onFormFieldChanged}/>,
                         <FormSelectField
                             label='Payment Type'
                             onChange={props.onFormFieldChanged}
                             name='paytype'
-                            className={styles.inputBlock}
                             values={['PayPal', 'Cash', 'Bank']} />
                         ]}
                     />
@@ -93,16 +82,15 @@ export default function (props) {
 }
 
 function AddedFilesList(props) {
-    return <div>
+    return <ul>
         {props.addedFiles.map((image: File, key) => {
             return (
-                <p key={key}>
+                <li key={key}> 
                     {image.name} - {image.size}Kb
-                <button
-                        onClick={() => props.handleRemoveClicked(image)}>+</button>
-                </p>
+                    <button onClick={() => props.handleRemoveClicked(image)}>X</button>
+                </li>
             )
         })
         }
-    </div>
+    </ul>
 }
