@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/NAEBAY/static/css/main.91d97e1d.chunk.css",
+    "main.js": "/NAEBAY/static/js/main.3610853a.chunk.js",
+    "main.js.map": "/NAEBAY/static/js/main.3610853a.chunk.js.map",
+    "runtime-main.js": "/NAEBAY/static/js/runtime-main.2a6f7a01.js",
+    "runtime-main.js.map": "/NAEBAY/static/js/runtime-main.2a6f7a01.js.map",
+    "static/js/2.eb73f59f.chunk.js": "/NAEBAY/static/js/2.eb73f59f.chunk.js",
+    "static/js/2.eb73f59f.chunk.js.map": "/NAEBAY/static/js/2.eb73f59f.chunk.js.map",
+    "index.html": "/NAEBAY/index.html",
+    "precache-manifest.b225659cac79cd7c50132d47b5293428.js": "/NAEBAY/precache-manifest.b225659cac79cd7c50132d47b5293428.js",
+    "service-worker.js": "/NAEBAY/service-worker.js",
+    "static/css/main.91d97e1d.chunk.css.map": "/NAEBAY/static/css/main.91d97e1d.chunk.css.map"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.2a6f7a01.js",
+    "static/js/2.eb73f59f.chunk.js",
+    "static/css/main.91d97e1d.chunk.css",
+    "static/js/main.3610853a.chunk.js"
+  ]
+}
